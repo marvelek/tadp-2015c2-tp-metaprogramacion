@@ -6,3 +6,6 @@
 * Federico Cano
 * Marcos Pavelek
 * Ornella Bordino
+
+[Decisiones de Diseño] (https://docs.google.com/document/d/1IBh5sWjJUNVnn6K-BK5aECQpHXheY1ygc-r0ud4fVTk/edit)
+
