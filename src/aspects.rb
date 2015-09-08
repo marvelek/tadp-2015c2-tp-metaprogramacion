@@ -1,19 +1,39 @@
 require_relative '../src/origin'
+require_relative '../src/exceptions/empty_arguments'
+require_relative '../src/exceptions/empty_origins'
 class Aspects
 
   def self.on(*origins, &block)
-    origin = Origin.new
-    origins.each do |an_origin|
-      if an_origin.is_a? Class
-        origin.add_class(an_origin)
-      elsif an_origin.is_a? Module
-        origin.add_module(an_origin)
-      else
-        origin.add_objects(an_origin)
-      end
+    if origins.empty?
+      raise EmptyArgumentsException.new
     end
+    sources = get_sources(origins)
+    sources.each do |source|
+      source.is_a? Module ? source.send(:include, AspectableModule) : source.extend(AspectableObject)
+      source.instance_eval(&block)
+    end
+  end
 
-    origin.instance_eval(&block)
+  def self.get_sources(origins)
+    results_sources = []
+    origins.each do |origin|
+      origin.class.is_a? Regexp ? results_sources.push get_sources_from_regexp(origin) : results_sources.push origin
+    end
+    if results_sources.empty?
+      raise EmptyOriginsException.new
+    end
+    results_sources.flatten!
+    results_sources.uniq!
+  end
 
+  def self.get_sources_from_regexp(regexp)
+    matching_sources = []
+    Object.constants.select do | class_symbol |
+      class_symbol.grep(regexp)
+    end
+    .each do | symbol |
+      matching_sources.push Object.const_get(symbol)
+    end
+    matching_sources
   end
 end
