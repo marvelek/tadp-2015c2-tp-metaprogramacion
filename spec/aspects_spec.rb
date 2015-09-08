@@ -6,20 +6,22 @@ describe 'aspects' do
 
   it 'should always be OK because I dont know how to test it yet' do
 
-    a = TestClass.new
+    #Don't use the same classes / modules for these tests to avoid side effect on unit tests.
+
+    a = CompleteTestClass.new
     Aspects.on a, /Tes/ do
       transform(where(namely(/.*crazy.*/))) do
         inject({p1: 'Hola'})
       end
     end
 
-    b = TestClass.new
-    b.extend(TestModule)
+    b = CompleteTestClass.new
+    b.extend(CompleteTestModule)
 
     b.crazy_method 'Metodo'
     b.super_crazy_method 'Metodo'
     a.crazy_method 'Metodo'
-    a.extend(TestModule)
+    a.extend(CompleteTestModule)
     a.super_crazy_method 'Metodo'
 
   end
