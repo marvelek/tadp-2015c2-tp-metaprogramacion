@@ -1,19 +1,18 @@
-require_relative '../src/origin'
+require_relative '../src/aspectable'
 class Aspects
 
   def self.on(*origins, &block)
-    origin = Origin.new
-    origins.each do |an_origin|
-      if an_origin.is_a? Class
-        origin.add_class(an_origin)
-      elsif an_origin.is_a? Module
-        origin.add_module(an_origin)
+
+    #processed_origins = foo(origins)
+    processed_origins = origins
+
+    processed_origins.each do |origin|
+      if origin.is_a? Module
+        origin.extend(AspectableModule)
       else
-        origin.add_objects(an_origin)
+        origin.extend(AspectableObject)
       end
+      origin.instance_eval(&block)
     end
-
-    origin.instance_eval(&block)
-
   end
 end

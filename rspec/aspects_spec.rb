@@ -6,11 +6,17 @@ describe 'aspects' do
 
   it 'should always be OK because I dont know how to test it yet' do
 
-    Aspects.on TestClass, TestModule do
-      transform(where(name(/.*crazy.*/))) do
-        print_name(', super crazy. ')
+    a = TestClass.new
+    Aspects.on a, TestModule do
+      transform(where(namely(/.*crazy.*/))) do
+        create_method()
       end
     end
+
+    b = TestClass.new
+    b.extend(TestModule)
+    print b.sarasa
+    print a.sarasa
 
   end
 end
