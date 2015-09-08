@@ -22,13 +22,6 @@ class Aspects
   end
 
   def self.get_sources_from_regexp(regexp)
-    matching_sources = []
-    Object.constants.select do |class_symbol|
-      regexp.match(class_symbol)
-    end
-        .each do |symbol|
-      matching_sources.push Object.const_get(symbol)
-    end
-    matching_sources
+    Object.constants.grep(regexp).flat_map do |sym| Object.const_get(sym) end
   end
 end
