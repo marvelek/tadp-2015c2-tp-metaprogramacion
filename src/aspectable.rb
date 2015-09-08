@@ -7,18 +7,18 @@ module AbstractAspectable
   include Condition
 
   def where (*conditions)
-    proc { |methods_array|
-      methods_array.select do |a_method|
-        conditions.all? do |a_condition|
-          a_condition.call(a_method)
+    get_aspectable_methods.select do |method|
+        conditions.all? do |condition|
+          condition.call(method)
         end
       end
     }
   end
 
-  def transform (where_proc, &block)
-    where_proc.call(get_aspectable_methods).each do |a_method|
-      block.call.call(a_method) #First call executes the transform block. Second call is for the actual transformer
+  def transform (filtered_methods, &block)
+    filtered_methods.each do |method_symbol|
+      method = get_aspectable_method(method_symbol)
+      block.call.call(method) #First call executes the transform block. Second call is for the actual transformer
     end
   end
 
