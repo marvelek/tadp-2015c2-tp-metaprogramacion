@@ -27,6 +27,27 @@ describe 'origins sources' do
     end
   end
 
+  context 'when origins have some regexp' do
+    let(:sources) {
+      Aspects.get_sources([/1/,/XX/,/[X]12/])
+    }
+    it 'sources should be exactly...' do
+      expect(sources).to contain_exactly(J12,XX12X,X123XX,ABA1)
+    end
+
+    it 'sources should not contain A35X' do
+      expect(sources).to_not contain_exactly(A35X)
+    end
+
+    it 'should get 4 sources when regexp is /2/' do
+      sources_regexp_2 = Aspects.get_sources([/2/])
+      expect(sources_regexp_2.size).to equal(4)
+    end
+  end
+
+  context 'when origins are class,modules, objects and regexp' do
+    #To Do: tests!
+  end
 end
 
 
