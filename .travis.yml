@@ -1,4 +1,6 @@
 language: ruby
 rvm:
   - 2.2.2
-script: rspec spec
+  
+before_install: gem install rspec  
+script: bundle exec rspec spec
