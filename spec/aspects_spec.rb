@@ -9,14 +9,18 @@ describe 'aspects' do
     a = TestClass.new
     Aspects.on a, /Tes/ do
       transform(where(namely(/.*crazy.*/))) do
-        create_method
+        inject({p1: 'Hola'})
       end
     end
 
     b = TestClass.new
     b.extend(TestModule)
-    print b.sarasa
-    print a.sarasa
+
+    b.crazy_method 'Metodo'
+    b.super_crazy_method 'Metodo'
+    a.crazy_method 'Metodo'
+    a.extend(TestModule)
+    a.super_crazy_method 'Metodo'
 
   end
 end

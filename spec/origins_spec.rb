@@ -29,10 +29,10 @@ describe 'origins sources' do
 
   context 'when origins have some regexp' do
     let(:sources) {
-      Aspects.get_sources([/1/,/XX/,/[X]12/])
+      Aspects.get_sources([/1/, /XX/, /[X]12/])
     }
     it 'sources should be exactly...' do
-      expect(sources).to contain_exactly(J12,XX12X,X123XX,ABA1)
+      expect(sources).to contain_exactly(J12, XX12X, X123XX, ABA1)
     end
 
     it 'sources should not contain A35X' do

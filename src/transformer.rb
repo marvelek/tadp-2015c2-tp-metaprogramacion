@@ -1,14 +1,30 @@
 module Transformer
 
-  def print_name(param)
-    proc { |a_method| print "#{a_method} #{param}" }
-  end
+  def inject(hash = {})
+    proc { |method|
+      param_list = method.parameters.flat_map do |param|
+        param[1]
+      end
 
-  def create_method()
-    proc { define_aspectable_method(:sarasa) do
-      print "This is a created method!! "
-    end }
-  end
+      hash_array = hash.to_a
 
+      define_aspectable_method(method.name) do |*parameters|
+        args = param_list.zip(parameters).each do |param_tuple|
+          hash_array.each do |hash_tuple|
+            if param_tuple[0] == hash_tuple[0]
+              param_tuple[1] = hash_tuple[1]
+            end
+          end
+        end
+
+        args_values = args.flat_map do |tuple|
+          tuple[1]
+        end
+
+        method.bind(self).call(*args_values)
+      end
+    }
+  end
 end
+
 

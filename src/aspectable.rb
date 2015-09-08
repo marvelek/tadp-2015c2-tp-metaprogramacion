@@ -14,9 +14,9 @@ module AbstractAspectable
     end
   end
 
-  def transform (filtered_methods, &block)
-    filtered_methods.each do |method_symbol|
-      method = get_aspectable_method(method_symbol)
+  def transform (methods, &block)
+    methods.each do |method_sym|
+      method = get_aspectable_method(method_sym)
       block.call.call(method) #First call executes the transform block. Second call is for the actual transformer
     end
   end
