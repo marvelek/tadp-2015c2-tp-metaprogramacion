@@ -1,5 +1,5 @@
 class NonMatchingOriginException < RuntimeError
   def initialize
-    super('The regular expression does not match any Module or Class')
+    super('Wrong number of arguments (0 for +1)')
   end
 end
