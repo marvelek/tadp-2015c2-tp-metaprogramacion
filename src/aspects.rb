@@ -16,6 +16,7 @@ class Aspects
     sources = origins.flat_map do |origin|
       origin.is_a?(Regexp) ? get_sources_from_regexp(origin) : origin
     end
+    sources.uniq!
     raise NonMatchingOriginException unless !sources.empty?
     sources
   end
