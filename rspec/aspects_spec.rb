@@ -7,9 +7,9 @@ describe 'aspects' do
   it 'should always be OK because I dont know how to test it yet' do
 
     a = TestClass.new
-    Aspects.on a, TestModule do
+    Aspects.on a, /Tes/ do
       transform(where(namely(/.*crazy.*/))) do
-        create_method()
+        create_method
       end
     end
 

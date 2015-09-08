@@ -1,5 +1,5 @@
 class EmptyOriginsException < RuntimeError
   def initialize
-    super('origen vacio')
+    super('Empty Origin list')
   end
 end
