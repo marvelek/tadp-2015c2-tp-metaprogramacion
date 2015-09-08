@@ -45,11 +45,11 @@ module AspectableObject
   include AbstractAspectable
 
   def get_aspectable_methods
-    methods
+    singleton_class.instance_methods
   end
 
   def get_aspectable_method(method_symbol)
-    method(method_symbol)
+    singleton_class.instance_method(method_symbol)
   end
 
   def define_aspectable_method(symbol, &block)
