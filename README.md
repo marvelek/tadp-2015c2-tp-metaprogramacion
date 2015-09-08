@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/marvelek/tadp-2015c2-tp-metaprogramacion.png)](http://travis-ci.org/ngsmrk/comix_scraper)
+
 #Programación Orientada a Aspectos
 ##TADP - 2015 C2 - TP Metaprogramación
 
