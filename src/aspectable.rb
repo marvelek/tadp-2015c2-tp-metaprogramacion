@@ -11,8 +11,7 @@ module AbstractAspectable
         conditions.all? do |condition|
           condition.call(method)
         end
-      end
-    }
+    end
   end
 
   def transform (filtered_methods, &block)
