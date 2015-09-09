@@ -7,7 +7,8 @@ module AbstractAspectable
   include Condition
 
   def where (*conditions)
-    get_aspectable_methods.select do |method|
+    get_aspectable_methods.select do |method_symbol|
+        method = get_aspectable_method(method_symbol)
         conditions.all? do |condition|
           condition.call(method)
         end
