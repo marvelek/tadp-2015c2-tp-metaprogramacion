@@ -15,10 +15,11 @@ module AbstractAspectable
   end
 
   def where (*conditions)
-    get_aspectable_methods.select do |method|
-      conditions.all? do |condition|
-        condition.call(method)
-      end
+    get_aspectable_methods.select do |method_symbol|
+        method = get_aspectable_method(method_symbol)
+        conditions.all? do |condition|
+          condition.call(method)
+        end
     end
   end
 
@@ -38,7 +39,7 @@ module AspectableModule
   include AbstractAspectable
 
   def get_aspectable_methods
-    instance_methods
+    instance_methods + private_instance_methods
   end
 
   def get_aspectable_method(method_symbol)
@@ -55,7 +56,7 @@ module AspectableObject
   include AbstractAspectable
 
   def get_aspectable_methods
-    singleton_class.instance_methods
+    singleton_class.instance_methods + singleton_class.private_instance_methods
   end
 
   def get_aspectable_method(method_symbol)

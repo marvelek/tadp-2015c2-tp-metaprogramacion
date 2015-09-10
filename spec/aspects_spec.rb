@@ -6,6 +6,7 @@ describe 'aspects' do
 
   it 'should always be OK because I dont know how to test it yet' do
 
+<<<<<<< HEAD:spec/aspects_spec.rb
     #Don't use the same classes / modules for these tests to avoid side effect on unit tests.
 
     Aspects.on CompleteTestClass do
@@ -22,5 +23,14 @@ describe 'aspects' do
     print a.crazy_method 'Metodo'
     print a.super_crazy_method 'Metodo'
 
+=======
+    a = TestClass.new
+    Aspects.on a, /Tes/ do
+      transform(where(name(/.*crazy.*/))) do
+        create_method
+      end
+    end
+
+>>>>>>> origin/develop:specs/aspects_spec.rb
   end
 end
