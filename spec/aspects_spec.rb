@@ -8,21 +8,19 @@ describe 'aspects' do
 
     #Don't use the same classes / modules for these tests to avoid side effect on unit tests.
 
-    a = CompleteTestClass.new
-    Aspects.on a, /CompleteTes/ do
-      transform(where(namely(/.*crazy.*/))) do
-        inject({p1: 'Hola'})
+    Aspects.on CompleteTestClass do
+      transform(where(name(/.*crazy.*/))) do
+        sarasa
+        inject({p1: 'Crazy'})
       end
     end
 
+    a = CompleteTestClass.new
     b = CompleteTestClass.new
-    b.extend(CompleteTestModule)
-
-    b.crazy_method 'Metodo'
-    b.super_crazy_method 'Metodo'
-    a.crazy_method 'Metodo'
-    a.extend(CompleteTestModule)
-    a.super_crazy_method 'Metodo'
+    print b.crazy_method 'Metodo'
+    print b.super_crazy_method 'Metodo'
+    print a.crazy_method 'Metodo'
+    print a.super_crazy_method 'Metodo'
 
   end
 end

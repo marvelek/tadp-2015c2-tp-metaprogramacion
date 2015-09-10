@@ -6,18 +6,29 @@ module AbstractAspectable
   include Transformer
   include Condition
 
+  def transformer_command
+    @transformer_command ||= []
+  end
+
+  def add_to_transformer_command(transformer)
+    transformer_command.push(transformer)
+  end
+
   def where (*conditions)
     get_aspectable_methods.select do |method|
-        conditions.all? do |condition|
-          condition.call(method)
-        end
+      conditions.all? do |condition|
+        condition.call(method)
+      end
     end
   end
 
   def transform (methods, &block)
-    methods.each do |method_sym|
-      method = get_aspectable_method(method_sym)
-      block.call.call(method) #First call executes the transform block. Second call is for the actual transformer
+    block.call
+    transformer_command.each do |transformer|
+      methods.each do |method_sym|
+        method = get_aspectable_method(method_sym)
+        transformer.call(method)
+      end
     end
   end
 

@@ -1,7 +1,7 @@
 module Condition
 
-  def namely(regex)
-    proc { |a_method| regex.match(a_method) }
+  def name(regex)
+    proc { |method| regex.match(method) }
   end
 
 end
