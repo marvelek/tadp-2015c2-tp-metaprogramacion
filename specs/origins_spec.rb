@@ -39,9 +39,9 @@ describe 'origins sources' do
       expect(sources).to_not contain_exactly(A35X)
     end
 
-    it 'should get 4 sources when regexp is /2/' do
+    it 'should get 5 sources when regexp is /2/' do
       sources_regexp_2 = Aspects.get_sources([/2/])
-      expect(sources_regexp_2.size).to equal(4)
+      expect(sources_regexp_2.size).to equal(5)
     end
   end
 
