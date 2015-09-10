@@ -12,12 +12,12 @@ describe 'origins sources' do
 
     it 'get 2 source from one class and one object' do
       sources = Aspects.get_sources([Foo, Foo.new])
-      expect(sources.size).to equal(2)
+      expect(sources.size).to eq(2)
     end
 
     it 'get 2 source from one class with mixin included and one object' do
       sources = Aspects.get_sources([ABA1, XX12X.new])
-      expect(sources.size).to equal(2)
+      expect(sources.size).to eq(2)
     end
   end
 
@@ -41,7 +41,7 @@ describe 'origins sources' do
 
     it 'should get 5 sources when regexp is /2/' do
       sources_regexp_2 = Aspects.get_sources([/2/])
-      expect(sources_regexp_2.size).to equal(5)
+      expect(sources_regexp_2.size).to eq(5)
     end
   end
 
