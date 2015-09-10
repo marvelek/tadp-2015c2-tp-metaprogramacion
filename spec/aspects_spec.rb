@@ -1,6 +1,6 @@
 require 'rspec'
 require_relative '../src/aspects'
-require_relative '../specs/domain_mock'
+require_relative '../spec/domain_mock'
 
 describe 'aspects' do
 
