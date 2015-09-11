@@ -33,7 +33,7 @@ module AbstractAspectable
       require_relative "../src/transformers/#{symbol}"
     rescue LoadError
       require_relative "../src/conditions/#{symbol}"
-    rescue
+    rescue LoadError
       super
     end
     extend get_module_from_method(symbol)
