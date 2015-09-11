@@ -45,8 +45,4 @@ describe 'origins sources' do
       expect(sources_regexp_2.size).to equal(3)
     end
   end
-
-  context 'when origins are class,modules, objects and regexp' do
-    #To Do: tests!
-  end
 end

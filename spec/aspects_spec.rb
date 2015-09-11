@@ -8,15 +8,10 @@ describe 'aspects' do
 
     a = TestClass.new
     Aspects.on a, /Tes/ do
-      transform(where(namely(/.*crazy.*/))) do
+      transform(where(name(/.*crazy.*/))) do
         create_method
       end
     end
-
-    b = TestClass.new
-    b.extend(TestModule)
-    print b.sarasa
-    print a.sarasa
 
   end
 end
