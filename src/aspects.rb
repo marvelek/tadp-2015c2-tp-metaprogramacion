@@ -24,4 +24,5 @@ class Aspects
   def self.get_sources_from_regexp(regexp)
     Object.constants.grep(regexp).flat_map do |sym| Object.const_get(sym) end
   end
+
 end

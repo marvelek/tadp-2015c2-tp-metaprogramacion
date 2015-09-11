@@ -8,19 +8,26 @@ describe 'aspects' do
 
     #Don't use the same classes / modules for these tests to avoid side effect on unit tests.
 
-    Aspects.on CompleteTestClass do
-      transform(where(name(/.*crazy.*/))) do
-        sarasa
-        inject({p1: 'Crazy'})
+    object_instance = Object.new
+    object_instance.extend CompleteTestModule
+    Aspects.on CompleteTestClass, CompleteTestModule, object_instance  do
+      transform(where(selector(/.*crazy.*/))) do
+        inject({p2: 'crazier', p1: proc { |receptor, mensaje, arg_anterior|
+                 "crazy(#{mensaje}->#{arg_anterior})"}
+               }
+        )
       end
     end
 
-    a = CompleteTestClass.new
-    b = CompleteTestClass.new
-    print b.crazy_method 'Metodo'
-    print b.super_crazy_method 'Metodo'
-    print a.crazy_method 'Metodo'
-    print a.super_crazy_method 'Metodo'
+    complete_test_class_instance = CompleteTestClass.new
+    object_instance_not_transformed = Object.new
+    object_instance_not_transformed.extend CompleteTestModule
+    puts object_instance_not_transformed.crazy_method 'Metodo'
+    puts object_instance_not_transformed.super_crazy_method 'Metodo'
+    puts complete_test_class_instance.crazy_method 'Metodo'
+    puts complete_test_class_instance.super_crazy_method 'Metodo'
+    puts object_instance.crazy_method 'Metodo'
+    puts object_instance.super_crazy_method 'Metodo'
 
   end
 end
