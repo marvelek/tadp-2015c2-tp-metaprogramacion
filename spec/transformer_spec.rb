@@ -1,6 +1,5 @@
 require 'rspec'
 require_relative '../src/domain_mock'
-require_relative '../src/aspectable'
 
 describe 'Inject' do
 
@@ -8,11 +7,10 @@ describe 'Inject' do
 
     let(:instance) {
       instance = TestClass.new
-      instance.extend(AspectableObject)
     }
 
     let(:method) {
-      instance.get_aspectable_method(:crazy_method)
+      instance.method(:crazy_method)
     }
 
     it 'should return This is a boring method if not transformed' do
@@ -56,22 +54,19 @@ describe 'Inject' do
 
     let(:instance) {
       instance = TestClass.new
-      instance.extend(AspectableObject)
     }
 
     let(:crazy_method) {
-      instance.get_aspectable_method(:crazy_method)
+      instance.method(:crazy_method)
     }
 
     let(:super_crazy_method) {
       instance.extend(TestModule)
-      instance.get_aspectable_method(:super_crazy_method)
+      instance.method(:super_crazy_method)
     }
 
     it 'should transform both methods' do
       instance.inject({p1: 'crazy', p2: 'crazier'})
-      instance.transformer_command[0].call(crazy_method)
-      instance.transformer_command[0].call(super_crazy_method)
       ret_1 = instance.crazy_method('boring')
       ret_2 = instance.super_crazy_method('borier')
       expect(ret_1).to eq('This is a crazy method')

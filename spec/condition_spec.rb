@@ -1,31 +1,29 @@
 require 'rspec'
 require_relative '../src/domain_mock'
-require_relative '../src/aspectable'
 
-describe 'Selector' do
+describe 'Name' do
 
   context 'When selector is used on a crazy_method' do
 
     let(:instance) {
       instance = TestClass.new
-      instance.extend AspectableObject
     }
 
     let(:crazy_method) {
-      instance.get_aspectable_method(:crazy_method)
+      instance.method(:crazy_method)
     }
 
     let(:super_crazy_method) {
       instance.extend TestModule
-      instance.get_aspectable_method(:super_crazy_method)
+      instance.method(:super_crazy_method)
     }
 
     it 'should raise ArgumentError wrong number of arguments (0 for 1) if no regex is given' do
-      expect { instance.selector() }.to raise_error ArgumentError, 'wrong number of arguments (0 for 1)'
+      expect { instance.name() }.to raise_error ArgumentError, 'wrong number of arguments (0 for 1)'
     end
 
     it 'should match crazy_method if /crazy/ is used' do
-      block = instance.selector(/crazy/)
+      block = instance.name(/crazy/)
       expect(block.call crazy_method).to be_truthy
     end
 
