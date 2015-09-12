@@ -26,16 +26,21 @@ module InjectInstanceMethods
 
 end
 
+
+
 module Inject
   include InjectInstanceMethods
 
-  def inject(hash = {})
-    add_to_transformer_command(
-        proc { |original_method|
-          parameters_list = flat_map_second original_method.parameters
-          define_injected_method hash, original_method, parameters_list
-        }
-    )
+  def inject(hash)
+    raise ArgumentError.new 'empty hash' if hash.empty?
+    add_to_transformer_command(create_inject_proc hash)
+  end
+
+  def create_inject_proc(hash)
+    proc { |original_method|
+      parameters_list = flat_map_second original_method.parameters
+      define_injected_method hash, original_method, parameters_list
+    }
   end
 
   def define_injected_method(hash, original_method, parameters_list)

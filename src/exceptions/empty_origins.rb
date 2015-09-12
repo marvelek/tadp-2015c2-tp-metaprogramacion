@@ -1,5 +1,5 @@
 class EmptyOriginsException < RuntimeError
   def initialize
-    super('Empty Origin list')
+    super('Wrong number of arguments (0 for +1)')
   end
 end

@@ -9,6 +9,10 @@ module AbstractAspectable
     transformer_command.push transformer
   end
 
+  def clear_transformer_command
+    @transformer_command = []
+  end
+
   def where (*conditions)
     get_aspectable_methods.select do |method_symbol|
       method = get_aspectable_method(method_symbol)
@@ -26,15 +30,18 @@ module AbstractAspectable
         transformer.call method
       end
     end
+    clear_transformer_command
   end
 
   def method_missing(symbol, *args)
     begin
       require_relative "../src/transformers/#{symbol}"
     rescue LoadError
-      require_relative "../src/conditions/#{symbol}"
-    rescue LoadError
-      super
+      begin
+        require_relative "../src/conditions/#{symbol}"
+      rescue LoadError
+        super
+      end
     end
     extend get_module_from_method(symbol)
     send symbol, *args

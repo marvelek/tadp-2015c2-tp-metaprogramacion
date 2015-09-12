@@ -1,5 +1,5 @@
 class NonMatchingOriginException < RuntimeError
   def initialize
-    super('Wrong number of arguments (0 for +1)')
+    super('Empty Origin list')
   end
 end

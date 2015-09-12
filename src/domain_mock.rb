@@ -1,7 +1,7 @@
 module TestModule
 
   def super_crazy_method(p2)
-    "This is a by far a #{p2} method"
+    "This is by far a #{p2} method"
   end
 
 end
@@ -21,7 +21,7 @@ module CompleteTestModule
   end
 
   def super_crazy_method(p2)
-    "This is a by far a #{p2} method"
+    "This is by far a #{p2} method"
   end
 
 end
@@ -33,7 +33,7 @@ class CompleteTestClass
   end
 
   def super_crazy_method(p2)
-    "This is a by far a #{p2} method"
+    "This is by far a #{p2} method"
   end
 
 end
