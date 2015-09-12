@@ -75,7 +75,7 @@ describe 'Inject' do
       ret_1 = instance.crazy_method('boring')
       ret_2 = instance.super_crazy_method('borier')
       expect(ret_1).to eq('This is a crazy method')
-      expect(ret_2).to eq('This is a by far a crazier method')
+      expect(ret_2).to eq('This is by far a crazier method')
     end
 
   end
