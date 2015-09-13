@@ -15,7 +15,11 @@ module Aspects
   end
 
   def self.where (*conditions)
-    conditions.flatten.uniq
+    @methods.select do |method|
+      conditions.all? do |condition|
+        condition.call method
+      end
+    end
   end
 
   def self.transform(methods, &transformations)
