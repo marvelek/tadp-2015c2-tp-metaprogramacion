@@ -27,24 +27,23 @@ module InjectInstanceMethods
 end
 
 
-
 module Inject
   include InjectInstanceMethods
 
   def inject(hash)
     raise ArgumentError.new 'empty hash' if hash.empty?
-    add_to_transformer_command(create_inject_proc hash)
+    create_inject_proc hash
   end
 
   def create_inject_proc(hash)
-    proc { |original_method|
+    @methods.each do |original_method|
       parameters_list = flat_map_second original_method.parameters
       define_injected_method hash, original_method, parameters_list
-    }
+    end
   end
 
   def define_injected_method(hash, original_method, parameters_list)
-    define_aspectable_method original_method.name do |*original_args|
+    original_method.owner.send :define_method, original_method.name do |*original_args|
       extend InjectInstanceMethods
       param_args = replace_args(hash, original_method, parameters_list, original_args)
 
