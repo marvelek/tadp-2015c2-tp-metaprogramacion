@@ -1,4 +1,5 @@
-require_relative 'has_parameters_name'
+require_relative '../../src/conditions/has_parameters_name'
+require_relative '../../src/conditions/quantity_parameter'
 module Has_parameters
 
   def has_parameters(quantity, rule = nil)
