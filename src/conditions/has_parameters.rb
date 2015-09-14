@@ -1,4 +1,4 @@
-require_relative 'has_parameters_name'
+require_relative 'regexp_parameters'
 module Has_parameters
 
   def has_parameters(quantity, rule = nil)

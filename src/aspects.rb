@@ -1,6 +1,7 @@
 require_relative '../src/exceptions/empty_origins'
 require_relative '../src/exceptions/non_matching_origin'
 require_relative '../src/conditions/name'
+require_relative '../src/conditions/has_parameters'
 require_relative '../src/transformers/inject'
 
 module Aspects
