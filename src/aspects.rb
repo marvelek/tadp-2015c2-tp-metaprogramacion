@@ -6,6 +6,7 @@ require_relative '../src/transformers/inject'
 
 module Aspects
 
+  extend Has_parameters
   extend Name
   extend Inject
 
