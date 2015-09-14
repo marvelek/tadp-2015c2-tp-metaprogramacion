@@ -1,7 +1,5 @@
-require_relative '../../src/conditions/has_parameters_name'
 require_relative '../../src/conditions/quantity_parameters'
-require_relative 'regexp_parameters'
-
+require_relative '../../src/conditions/regexp_parameters'
 module Has_parameters
 
   def has_parameters(quantity, rule = nil)
