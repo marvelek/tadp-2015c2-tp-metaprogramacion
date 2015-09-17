@@ -4,11 +4,16 @@ require_relative '../src/domain_mock'
 require_relative '../src/conditions/has_parameters'
 
 describe 'Has paramaters' do
-  let(:instance) {
-    instance = Dummy_class1.new
-    instance.extend Has_parameters
+  let (:mandatory) {
+    Aspects.mandatory
+  }
+  let (:optional) {
+    Aspects.optional
   }
 
+  let(:instance) {
+    instance = Dummy_class1.new
+  }
   let (:three_mandatories) {
     instance.method(:method_3man)
   }
@@ -67,6 +72,40 @@ describe 'Has paramaters' do
 
     it 'method_2man_1opt should be true' do
       expect(block_mandatory_two_params.call two_mandatories_one_optional).to be_truthy
+    end
+
+    it 'method_2man should be true' do
+      expect(block_mandatory_two_params.call two_mandatories).to be_truthy
+    end
+
+    it 'method_3man should be false' do
+      expect(block_mandatory_two_params.call three_mandatories).to be_falsey
+    end
+
+    it 'method_2opt should be false' do
+      expect(block_mandatory_two_params.call two_optional).to be_falsey
+    end
+  end
+
+  context 'when is used with optional proc and expects 2 parameters' do
+    let (:block_optional_two_params) {
+      Aspects.has_parameters(2, optional)
+    }
+
+    it 'method_1man_2opt should be true' do
+      expect(block_optional_two_params.call one_mandatory_two_optional).to be_truthy
+    end
+
+    it 'method_3opt should be false' do
+      expect(block_optional_two_params.call three_optional).to be_falsey
+    end
+
+    it 'method_2opt should be true' do
+      expect(block_optional_two_params.call two_optional).to be_truthy
+    end
+
+    it 'method_2man should be true' do
+      expect(block_optional_two_params.call two_mandatories).to be_falsey
     end
   end
 end
