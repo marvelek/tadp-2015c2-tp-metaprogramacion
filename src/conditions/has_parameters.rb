@@ -1,5 +1,7 @@
 require_relative '../../src/conditions/quantity_parameters'
 require_relative '../../src/conditions/regexp_parameters'
+require_relative '../../src/conditions/proc_parameters'
+
 module Has_parameters
 
   def has_parameters(quantity, rule = nil)
@@ -11,4 +13,11 @@ module Has_parameters
     }
   end
 
+  def mandatory
+    proc { |parameter| parameter.first.equal?(:req) }
+  end
+
+  def optional
+    proc { |parameter| parameter.first.equal?(:opt) }
+  end
 end
