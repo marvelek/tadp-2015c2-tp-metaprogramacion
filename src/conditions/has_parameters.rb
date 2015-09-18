@@ -1,7 +1,3 @@
-require_relative '../../src/conditions/quantity_parameters'
-require_relative '../../src/conditions/regexp_parameters'
-require_relative '../../src/conditions/proc_parameters'
-
 module Has_parameters
 
   def has_parameters(quantity, rule = nil)
@@ -19,5 +15,26 @@ module Has_parameters
 
   def optional
     proc { |parameter| parameter.first.equal?(:opt) }
+  end
+end
+
+
+class RegexpParameters
+
+  def filter(parameters,quantity,regex)
+    parameters.map{|arg| arg[1].to_s}.grep(regex).size == quantity
+  end
+
+end
+
+class QuantityParameters
+  def filter(parameters,quantity,rule=nil)
+    parameters.size.equal?(quantity)
+  end
+end
+
+class ProcParameters
+  def filter(parameters, quantity, rule)
+    parameters.select { |parameter| rule.call parameter }.size.equal? quantity
   end
 end
