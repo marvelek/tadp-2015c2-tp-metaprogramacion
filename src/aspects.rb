@@ -3,12 +3,14 @@ require_relative '../src/exceptions/non_matching_origin'
 require_relative '../src/conditions/name'
 require_relative '../src/conditions/has_parameters'
 require_relative '../src/transformers/inject'
+require_relative '../src/transformers/redirect'
 
 module Aspects
 
   extend Has_parameters
   extend Name
   extend Inject
+  extend Redirect
 
   def self.on(*origins, &block)
     raise EmptyOriginsException if origins.empty?

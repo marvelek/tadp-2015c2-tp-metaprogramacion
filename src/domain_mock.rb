@@ -71,8 +71,14 @@ class Dummy_class1
   end
 end
 class Dummy_class2
+  def saludar(x)
+    "Hola, " + x
+  end
 end
 class Dummy_class3
+  def saludar(x)
+    "Adiosin, " + x
+  end
 end
 class Dummy_class4
 end
