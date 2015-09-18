@@ -71,6 +71,12 @@ class Dummy_class1
   end
 end
 class Dummy_class2
+  def method_1arg_with_m(arg1,arg_with_m)
+  end
+  def method_with_no_m(arg1,arg2)
+  end
+  def method_with_param(parameter1,parameter2)
+  end
 end
 class Dummy_class3
 end
