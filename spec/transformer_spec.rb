@@ -1,5 +1,6 @@
 require 'rspec'
 require_relative '../src/domain_mock'
+require_relative '../src/transformers/inject'
 
 describe 'Inject' do
 
@@ -7,6 +8,7 @@ describe 'Inject' do
 
     let(:instance) {
       instance = TestClass.new
+      instance.extend(Inject)
     }
 
     let(:method) {
