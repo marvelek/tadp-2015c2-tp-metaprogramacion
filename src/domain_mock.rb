@@ -73,6 +73,11 @@ end
 class Dummy_class2
   def saludar(x)
     "Hola, " + x
+  def method_1arg_with_m(arg1,arg_with_m)
+  end
+  def method_with_no_m(arg1,arg2)
+  end
+  def method_with_param(parameter1,parameter2)
   end
 end
 class Dummy_class3

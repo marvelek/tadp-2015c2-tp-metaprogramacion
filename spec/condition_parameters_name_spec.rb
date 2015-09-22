@@ -1,6 +1,6 @@
 require 'rspec'
 require_relative '../src/domain_mock'
-require_relative '../src/conditions/regexp_parameters'
+require_relative '../src/conditions/has_parameters'
 
 describe 'regexp_parameters' do
 

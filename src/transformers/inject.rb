@@ -54,4 +54,3 @@ module Inject
   end
 
 end
-
