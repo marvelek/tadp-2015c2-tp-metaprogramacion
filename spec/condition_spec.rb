@@ -1,45 +1,51 @@
 require 'rspec'
 require_relative '../src/domain_mock'
-require_relative '../src/aspects'
+require_relative '../src/conditions/name'
 
-describe 'Selector' do
+describe 'Name' do
 
   context 'When selector is used on a crazy_method' do
 
-    let(:crazy_method) {
+    let(:instance) {
       instance = TestClass.new
+      instance.extend(Name)
+    }
+
+    let(:crazy_method) {
       instance.method(:crazy_method)
     }
 
     let(:super_crazy_method) {
-      instance = TestClass.new
       instance.extend TestModule
       instance.method(:super_crazy_method)
     }
 
+    it 'should raise ArgumentError wrong number of arguments (0 for 1) if no regex is given' do
+      expect { instance.name() }.to raise_error ArgumentError, 'wrong number of arguments (0 for 1)'
+    end
+
     it 'should match crazy_method if /crazy/ is used' do
-      block = Aspects.name(/crazy/)
+      block = instance.name(/crazy/)
       expect(block.call crazy_method).to be_truthy
     end
 
     it 'should not match crazy_method if /boring/ is used' do
-      block = Aspects.name(/boring/)
+      block = instance.name(/boring/)
       expect(block.call crazy_method).to be_falsey
     end
 
     it 'should match crazy_method and super_crazy_method if /crazy/ is used' do
-      block = Aspects.name(/crazy/)
+      block = instance.name(/crazy/)
       expect(block.call crazy_method).to be_truthy
       expect(block.call super_crazy_method).to be_truthy
     end
 
     it 'should match crazy_method but no super_crazy_method if /^crazy/ is used' do
-      block = Aspects.name(/^crazy/)
+      block = instance.name(/^crazy/)
       expect(block.call crazy_method).to be_truthy
       expect(block.call super_crazy_method).to be_falsey
     end
 
 
   end
-
 end
