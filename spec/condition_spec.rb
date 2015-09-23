@@ -1,6 +1,5 @@
 require 'rspec'
 require_relative '../src/domain_mock'
-require_relative '../src/conditions/name'
 
 describe 'Name' do
 
@@ -8,7 +7,6 @@ describe 'Name' do
 
     let(:instance) {
       instance = TestClass.new
-      instance.extend(Name)
     }
 
     let(:crazy_method) {
@@ -30,18 +28,18 @@ describe 'Name' do
     end
 
     it 'should not match crazy_method if /boring/ is used' do
-      block = instance.name(/boring/)
+      block = instance.selector(/boring/)
       expect(block.call crazy_method).to be_falsey
     end
 
     it 'should match crazy_method and super_crazy_method if /crazy/ is used' do
-      block = instance.name(/crazy/)
+      block = instance.selector(/crazy/)
       expect(block.call crazy_method).to be_truthy
       expect(block.call super_crazy_method).to be_truthy
     end
 
     it 'should match crazy_method but no super_crazy_method if /^crazy/ is used' do
-      block = instance.name(/^crazy/)
+      block = instance.selector(/^crazy/)
       expect(block.call crazy_method).to be_truthy
       expect(block.call super_crazy_method).to be_falsey
     end

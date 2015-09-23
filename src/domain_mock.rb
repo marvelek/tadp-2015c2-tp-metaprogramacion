@@ -70,7 +70,7 @@ class Dummy_class1
   def method_2man_2opt(param1, param2, param3 = nil, param4 = nil)
   end
 end
-class Dummy_class2
+class Dummy_class5
   def saludar(x)
     "Hola, " + x
   def method_1arg_with_m(arg1,arg_with_m)
