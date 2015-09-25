@@ -52,9 +52,11 @@ module Aspects
   end
 
   def self.get_methods_from_class_or_module(origin)
-    origin.instance_methods.flat_map do |symbol|
+    all_methods = origin.instance_methods + origin.private_instance_methods
+    all_methods.flat_map do |symbol|
       origin.instance_method(symbol)
     end
+
   end
 
 end

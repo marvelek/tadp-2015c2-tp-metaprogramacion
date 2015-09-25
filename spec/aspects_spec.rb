@@ -8,14 +8,14 @@ describe 'aspects' do
 
     it 'should filter crazy_method and inject the word crazy into param p1' do
 
-      instance = CompleteTestClass.new
-      Aspects.on instance do
+      Aspects.on CompleteTestClass do
         transform(where(name(/^crazy/))) do
           inject({p1: 'crazy'})
         end
       end
 
-
+      instance = CompleteTestClass.new
+      instance.crazy_method('boring')
       expect(instance.crazy_method('boring')).to eq 'This is a crazy method'
 
     end
