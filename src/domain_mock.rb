@@ -91,3 +91,9 @@ end
 class Dummy_class_mixin2
   extend Dummy_mixin2
 end
+
+class Mi_clase
+  def m1(x,y)
+    false
+  end
+end
