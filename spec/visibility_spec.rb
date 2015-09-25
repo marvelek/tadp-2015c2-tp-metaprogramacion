@@ -7,6 +7,7 @@ describe 'Visibility' do
 
   let(:dummy_instance){
     dummy_instance = Dummy_class2.new
+    dummy_instance.extend(Visibility)
   }
 
   let(:dummy_private_method){
@@ -27,8 +28,8 @@ describe 'Visibility' do
     }
 
     it 'it should contain the bar method in the private ones' do
-     block = (Aspects.on Dummy_class2 do where name(/bar/),is_private end)
-     expect(block).to eq([:bar])
+     block = dummy_instance.is_private
+     expect(block.call dummy_private_method).to be_truthy
      end
     end
 
