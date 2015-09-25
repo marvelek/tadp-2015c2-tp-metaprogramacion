@@ -39,7 +39,6 @@ describe 'Selector' do
       expect(block.call super_crazy_method).to be_falsey
     end
 
-
-  end
+    end
 
 end

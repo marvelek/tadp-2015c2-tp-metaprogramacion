@@ -12,6 +12,7 @@ class TestClass
     "This is a #{p1} method"
   end
 
+
 end
 
 module CompleteTestModule
@@ -47,6 +48,13 @@ end
 class Dummy_class1
 end
 class Dummy_class2
+  def dat_method
+  end
+
+  private
+  def bar
+  end
+
 end
 class Dummy_class3
 end

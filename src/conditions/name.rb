@@ -1,7 +1,7 @@
 module Name
 
   def name(regex)
-    proc { |method|
+    proc { |_,method|
       regex.match(method.name) }
   end
 

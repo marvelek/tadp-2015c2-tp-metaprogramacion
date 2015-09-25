@@ -2,11 +2,17 @@ require_relative '../src/exceptions/empty_origins'
 require_relative '../src/exceptions/non_matching_origin'
 require_relative '../src/conditions/name'
 require_relative '../src/transformers/inject'
+require_relative '../src/conditions/visibility'
+require_relative '../src/conditions/neg'
 
 module Aspects
 
   extend Name
   extend Inject
+  extend Visibility
+  extend Neg
+
+ attr_accessor :target_origin
 
   def self.on(*origins, &block)
     raise EmptyOriginsException if origins.empty?
@@ -17,7 +23,7 @@ module Aspects
   def self.where (*conditions)
     @methods.select do |method|
       conditions.all? do |condition|
-        condition.call method
+        condition.call( @@target_origin,method)
       end
     end
   end
@@ -43,7 +49,13 @@ module Aspects
 
   def self.get_methods(sources)
     sources.flat_map do |origin|
-      origin.is_a?(Module) ? get_methods_from_class_or_module(origin) : get_methods_from_class_or_module(origin.singleton_class)
+      if origin.is_a?(Module) then
+        get_methods_from_class_or_module(origin)
+       @@target_origin = origin
+      else
+        get_methods_from_class_or_module(origin.singleton_class)
+        @@target_origin = origin.singleton_class
+      end
     end
   end
 
