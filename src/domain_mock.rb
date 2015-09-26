@@ -93,6 +93,16 @@ class Dummy_class2
   def method_with_param(parameter1,parameter2)
   end
 end
+
+class Dummy_class22
+  def dat_method
+  end
+
+  private
+  def bar
+  end
+end
+
 class Dummy_class3
   def saludar(x)
     "Adiosin, " + x
@@ -108,6 +118,7 @@ class MiClase
   def hace_algo(p1, p2)
     p1 + '-' + p2
   end
+
   def hace_otra_cosa(p2, ppp)
     p2 + ':' + ppp
   end
