@@ -19,7 +19,7 @@ describe 'Inject_logic' do
     it 'Using before. Should be false the first time. As the original method gets to run.' do
       @methods = {m1 => instance.singleton_class}
       before do |instance,cont,*args|
-        instance.send :define_method, cont.name do |*args|
+        instance.define_singleton_method cont.name do |*args|
           true
         end
       end
