@@ -31,6 +31,16 @@ describe 'Visibility' do
      block = dummy_instance.is_private
      expect(block.call dummy_private_method).to be_truthy
      end
-    end
+  end
+
+  it 'it should contain the dat_method in the public ones' do
+    block = dummy_instance.is_public
+    expect(block.call dummy_public_method).to be_truthy
+  end
+
+  it 'it should not contain the dat_method in the private ones' do
+    block = dummy_instance.is_private
+    expect(block.call dummy_public_method).to be_falsey
+  end
 
 end

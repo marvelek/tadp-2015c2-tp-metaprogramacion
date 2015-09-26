@@ -1,5 +1,5 @@
 module Neg
   def neg(*conditions)
-    proc {|target_origin,method| conditions.none? {|condition| condition.call(target_origin,method)}}
+    proc {|method| conditions.none? {|condition| condition.call(method.name)}}
   end
 end
