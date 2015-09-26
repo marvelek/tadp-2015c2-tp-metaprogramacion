@@ -1,51 +1,47 @@
 require 'rspec'
 require_relative '../src/aspects'
 require_relative '../src/domain_mock'
+require_relative '../src/transformers/inject_logic'
 
-context 'When after is used' do
+describe 'Inject_logic' do
+  include Inject_logic
 
-  let(:a_proc) {
-    proc{ |instance, *args|
-      @x = 10
+  context 'When a logic inject is used' do
+
+    let(:instance) {
+      instance = Mi_clase.new
     }
-  }
-  let(:klass){
-    Mi_clase.new
-  }
 
-  it 'should be false the first time. As the original method gets to run.' do
-    Aspects.on Mi_clase do
-      transform(where name(/m1/)) do
-        before do |instance,cont,*args|
-          instance.send :define_method, cont.name do |*args|
-            true
-          end
-        end
-      end
-    end
-    expect(klass.m1(1,2)).to be_falsey
-    expect(klass.m1(1,2)).to be_truthy #Now is true because we have injected the logic forever.
-  end
+    let(:m1) {
+      instance.method(:m1).unbind
+    }
 
-  it 'should be true as the block runs after.' do
-    Aspects.on Mi_clase do
-      transform(where name(/m1/)) do
-        after do |instance,cont,*args|
+    it 'Using before. Should be false the first time. As the original method gets to run.' do
+      @methods = {m1 => instance.singleton_class}
+      before do |instance,cont,*args|
+        instance.send :define_method, cont.name do |*args|
           true
         end
       end
+      expect(instance.m1(1,2)).to be_falsey
+      expect(instance.m1(1,2)).to be_truthy #Now is true because we have injected the logic forever.
     end
-    expect(klass.m1(1,2)).to be_truthy
-  end
 
-  it 'should be true as the block runs after.' do
-    Aspects.on Mi_clase do
-      transform(where name(/m1/)) do
-        instead_of do |instance,cont,*args|
-          20 + 10
-        end
+    it 'Using after. Should be true as the block runs after.' do
+      @methods = {m1 => instance.singleton_class}
+      after do |instance,cont,*args|
+        true
       end
+      expect(instance.m1(1,2)).to be_truthy
     end
-    expect(klass.m1(1,2)).to eq 30
+
+    it 'Using instead_of. Instead of doing 2+3 we do 20+10' do
+      @methods = {m1 => instance.singleton_class}
+      instead_of do |instance,cont,*args|
+        20 + 10
+      end
+      expect(instance.m1(1,2)).to eq 30
+    end
+
   end
 end
