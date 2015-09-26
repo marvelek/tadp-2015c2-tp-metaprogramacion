@@ -1,29 +1,32 @@
 require_relative '../src/exceptions/empty_origins'
 require_relative '../src/exceptions/non_matching_origin'
 require_relative '../src/conditions/name'
+require_relative '../src/conditions/has_parameters'
 require_relative '../src/transformers/inject'
 require_relative '../src/conditions/visibility'
 require_relative '../src/conditions/neg'
+require_relative '../src/transformers/redirect'
 
 module Aspects
 
+  extend Has_parameters
   extend Name
   extend Inject
   extend Visibility
   extend Neg
-
- attr_accessor :target_origin
+  extend Redirect
 
   def self.on(*origins, &block)
     raise EmptyOriginsException if origins.empty?
     @methods = get_methods(get_sources origins)
+    @methods = Hash[*@methods]
     instance_eval &block
   end
 
   def self.where (*conditions)
-    @methods.select do |method|
+    @methods.select do |method, origin|
       conditions.all? do |condition|
-        condition.call( @@target_origin,method)
+        condition.call method
       end
     end
   end
@@ -49,19 +52,14 @@ module Aspects
 
   def self.get_methods(sources)
     sources.flat_map do |origin|
-      if origin.is_a?(Module) then
-        get_methods_from_class_or_module(origin)
-       @@target_origin = origin
-      else
-        get_methods_from_class_or_module(origin.singleton_class)
-        @@target_origin = origin.singleton_class
-      end
+      origin.is_a?(Module) ? get_methods_from_class_or_module(origin) : get_methods_from_class_or_module(origin.singleton_class)
     end
   end
 
   def self.get_methods_from_class_or_module(origin)
-    origin.instance_methods.flat_map do |symbol|
-      origin.instance_method(symbol)
+    all_methods = origin.instance_methods + origin.private_instance_methods
+    all_methods.flat_map do |symbol|
+      [origin.instance_method(symbol), origin]
     end
   end
 
