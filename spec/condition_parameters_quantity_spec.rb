@@ -5,6 +5,10 @@ require_relative '../src/conditions/has_parameters'
 
 describe 'QuantityParameters instance' do
 
+  let (:quantity_parameters) {
+    quantity_parameters = QuantityParameters.new
+  }
+
   context 'when asks for methods with one parameter' do
     let (:one_parameter_mandatory) {
       Dummy_class1.instance_method(:method_1param).parameters
@@ -16,9 +20,6 @@ describe 'QuantityParameters instance' do
       Dummy_class1.instance_method(:method_1opt).parameters
     }
 
-    let (:quantity_parameters) {
-      quantity_parameters = QuantityParameters.new
-    }
 
     it 'method_1param should be true' do
       expect(quantity_parameters.filter(one_parameter_mandatory, 1)).to be_truthy
