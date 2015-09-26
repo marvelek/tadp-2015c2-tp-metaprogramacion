@@ -1,6 +1,6 @@
 require_relative '../../src/transformers/transformer'
 
-module Inject_logic
+module InjectLogic
   include Transformer
   def before(&proc)
     @methods.each do |method,origin|

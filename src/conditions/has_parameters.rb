@@ -1,4 +1,4 @@
-module Has_parameters
+module HasParameters
 
   def has_parameters(quantity, rule = nil)
     proc { |method|

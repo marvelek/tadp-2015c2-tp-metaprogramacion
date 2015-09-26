@@ -10,13 +10,13 @@ require_relative '../src/transformers/inject_logic'
 
 module Aspects
 
-  extend Has_parameters
+  extend HasParameters
   extend Name
   extend Inject
   extend Visibility
   extend Neg
   extend Redirect
-  extend Inject_logic
+  extend InjectLogic
 
   def self.on(*origins, &block)
     raise EmptyOriginsException if origins.empty?

@@ -4,7 +4,7 @@ require_relative '../src/domain_mock'
 require_relative '../src/transformers/inject_logic'
 
 describe 'Inject_logic' do
-  include Inject_logic
+  include InjectLogic
 
   let(:instance) {
     instance = Mi_clase.new

@@ -5,7 +5,7 @@ require_relative '../src/conditions/has_parameters'
 
 describe 'ProcParameter instance' do
 
-  include Has_parameters
+  include HasParameters
 
   let (:one_parameter_mandatory) {
     Dummy_class1.instance_method(:method_1param).parameters
