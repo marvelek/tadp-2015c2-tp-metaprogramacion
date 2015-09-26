@@ -12,7 +12,7 @@ class TestClass
     "This is a #{p1} method"
   end
 
-  def crazy_long_method(p1,a1,var,var1,lorem2,ipsum2,var6,var9)
+  def crazy_long_method(p1, a1, var, var1, lorem2, ipsum2, var6, var9)
     "This is a #{p1} method"
   end
 
@@ -24,7 +24,7 @@ class TestClassRedirected
     "This is a redirected #{p1} method"
   end
 
-  def crazy_long_method(p1,a1,var,var1,lorem2,ipsum2,var6,var9)
+  def crazy_long_method(p1, a1, var, var1, lorem2, ipsum2, var6, var9)
     "This is a #{p1} method"
   end
 
@@ -102,6 +102,15 @@ class Dummy_class4
 end
 class Dummy_class_mixin2
   extend Dummy_mixin2
+end
+
+class MiClase
+  def hace_algo(p1, p2)
+    p1 + '-' + p2
+  end
+  def hace_otra_cosa(p2, ppp)
+    p2 + ':' + ppp
+  end
 end
 
 class Mi_clase
