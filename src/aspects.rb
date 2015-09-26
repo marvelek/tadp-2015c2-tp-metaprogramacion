@@ -3,6 +3,8 @@ require_relative '../src/exceptions/non_matching_origin'
 require_relative '../src/conditions/name'
 require_relative '../src/conditions/has_parameters'
 require_relative '../src/transformers/inject'
+require_relative '../src/conditions/visibility'
+require_relative '../src/conditions/neg'
 require_relative '../src/transformers/redirect'
 
 module Aspects
@@ -10,6 +12,8 @@ module Aspects
   extend Has_parameters
   extend Name
   extend Inject
+  extend Visibility
+  extend Neg
   extend Redirect
 
   def self.on(*origins, &block)
@@ -57,7 +61,6 @@ module Aspects
     all_methods.flat_map do |symbol|
       [origin.instance_method(symbol), origin]
     end
-
   end
 
 end
