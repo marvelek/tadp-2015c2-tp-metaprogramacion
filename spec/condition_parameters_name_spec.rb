@@ -18,24 +18,24 @@ describe 'regexp_parameters' do
       instance.method(:crazy_long_method)
     }
 
+    let(:regex_parameters) {
+      regex_parameters = RegexpParameters.new
+    }
+
     it 'should be true as crazy_method has one param with a p on its name' do
-      a = RegexpParameters.new
-      expect(a.filter(crazy_method.parameters,1,/p/)).to be_truthy
+      expect(regex_parameters.filter(crazy_method.parameters,1,/p/)).to be_truthy
     end
 
     it 'should be false as crazy_method has one param with a p on its name and not three' do
-      a = RegexpParameters.new
-      expect(a.filter(crazy_method.parameters,3,/p/)).to be_falsey
+      expect(regex_parameters.filter(crazy_method.parameters,3,/p/)).to be_falsey
     end
 
     it 'should be true as crazy_long_method has four param with var on its name' do
-      a = RegexpParameters.new
-      expect(a.filter(crazy_long_method.parameters,4,/var/)).to be_truthy
+      expect(regex_parameters.filter(crazy_long_method.parameters,4,/var/)).to be_truthy
     end
 
     it 'should be true as crazy_long_method has not param with w on its name' do
-      a = RegexpParameters.new
-      expect(a.filter(crazy_long_method.parameters,0,/w/)).to be_truthy
+      expect(regex_parameters.filter(crazy_long_method.parameters,0,/w/)).to be_truthy
     end
 
   end

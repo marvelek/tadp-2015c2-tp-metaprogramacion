@@ -30,19 +30,15 @@ describe 'origins sources' do
 
   context 'when origins have some regexp' do
     let(:sources) {
-      Aspects.get_sources([/1/,/mixin/])
+      Aspects.get_sources([/1/, /mixin/])
     }
     it 'sources should be exactly...' do
-      expect(sources).to contain_exactly(Dummy_class1,Dummy_class_mixin2,Dummy_mixin1,Dummy_mixin2,Dummy_mixin3)
+      expect(sources).to contain_exactly(Dummy_class1, Dummy_class_mixin2, Dummy_mixin1, Dummy_mixin2, Dummy_mixin3)
     end
 
     it 'sources should not contain Dummy_class4' do
       expect(sources).to_not contain_exactly(Dummy_class4)
     end
 
-    it 'should get 3 sources when regexp is /2/' do
-      sources_regexp_2 = Aspects.get_sources([/2/])
-      expect(sources_regexp_2.size).to equal(3)
-    end
   end
 end
