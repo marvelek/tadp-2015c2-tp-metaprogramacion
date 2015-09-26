@@ -18,6 +18,18 @@ class TestClass
 
 end
 
+class TestClassRedirected
+
+  def crazy_method(p1)
+    "This is a redirected #{p1} method"
+  end
+
+  def crazy_long_method(p1,a1,var,var1,lorem2,ipsum2,var6,var9)
+    "This is a #{p1} method"
+  end
+
+end
+
 module CompleteTestModule
 
   def crazy_method(p1)
