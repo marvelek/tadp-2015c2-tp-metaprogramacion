@@ -6,15 +6,16 @@ require_relative '../src/transformers/inject_logic'
 describe 'Inject_logic' do
   include Inject_logic
 
+  let(:instance) {
+    instance = Mi_clase.new
+  }
+
+  let(:m1) {
+    instance.method(:m1).unbind
+  }
+
   context 'When a logic inject is used' do
 
-    let(:instance) {
-      instance = Mi_clase.new
-    }
-
-    let(:m1) {
-      instance.method(:m1).unbind
-    }
 
     it 'Using before. Should be false the first time. As the original method gets to run.' do
       @methods = {m1 => instance.singleton_class}
