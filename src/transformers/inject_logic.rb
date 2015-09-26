@@ -16,7 +16,7 @@ module Inject_logic
     @methods.each do |method,origin|
       origin.send :define_method, method.name do |*args|
         method.bind(self).call *args
-        proc.call method.owner,method,*args
+        proc.call self,method,*args
       end
     end
     update_methods
@@ -25,7 +25,7 @@ module Inject_logic
   def instead_of(&proc)
     @methods.each do |method,origin|
       origin.send :define_method, method.name do |*args|
-        proc.call method.owner,method,*args
+        proc.call self,method,*args
       end
     end
     update_methods
