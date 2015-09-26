@@ -6,6 +6,7 @@ require_relative '../src/transformers/inject'
 require_relative '../src/conditions/visibility'
 require_relative '../src/conditions/neg'
 require_relative '../src/transformers/redirect'
+require_relative '../src/transformers/inject_logic'
 
 module Aspects
 
@@ -15,6 +16,7 @@ module Aspects
   extend Visibility
   extend Neg
   extend Redirect
+  extend Inject_logic
 
   def self.on(*origins, &block)
     raise EmptyOriginsException if origins.empty?
