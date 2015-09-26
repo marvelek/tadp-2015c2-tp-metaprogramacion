@@ -6,7 +6,7 @@ require_relative '../src/aspects'
 describe 'Visibility' do
 
   let(:dummy_instance){
-    dummy_instance = Dummy_class2.new
+    dummy_instance = Dummy_class22.new
     dummy_instance.extend(Visibility)
   }
 

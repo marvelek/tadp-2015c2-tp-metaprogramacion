@@ -40,7 +40,6 @@ describe 'aspects' do
         end
       end
 
-
       expect(instance.crazy_method('boring')).to eq 'This is a boring method'
 
     end
@@ -60,7 +59,7 @@ describe 'aspects' do
 
     it 'should filter crazy_method and and inject the word crazy into param p1 and crazier in p2 ' do
       Aspects.on CompleteTestClass do
-        transform(where(name(/crazy/),is_public)) do
+        transform(where(name(/crazy/), is_public)) do
           inject({p1: 'crazy', p2: 'crazier'})
         end
       end
@@ -71,7 +70,7 @@ describe 'aspects' do
 
     it 'should filter crazy_method and and inject the word crazy into param p1 and crazier in p2 ' do
       Aspects.on CompleteTestClass do
-        transform(where(name(/crazy/),is_public,neg(name(/^crazy/)))) do
+        transform(where(name(/crazy/), is_public, neg(name(/^crazy/)))) do
           inject({p1: 'crazy'})
         end
       end

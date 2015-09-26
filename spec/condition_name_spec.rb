@@ -6,7 +6,7 @@ describe 'Name' do
 
   include Name
 
-  context 'When selector is used on a crazy_method' do
+  context 'When name is used on a crazy_method' do
 
     let(:instance) {
       instance = TestClass.new
