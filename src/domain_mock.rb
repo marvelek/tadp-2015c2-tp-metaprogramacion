@@ -143,3 +143,9 @@ class Mi_clase
     false
   end
 end
+
+class Mi_clase_cp
+  def m1(x,y)
+    false
+  end
+end

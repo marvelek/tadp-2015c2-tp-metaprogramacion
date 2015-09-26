@@ -71,11 +71,11 @@ describe 'aspects' do
 
   context 'When a logic inject transformer is used' do
     let(:klass){
-      Mi_clase.new
+      Mi_clase_cp.new
     }
 
     it 'Using before. Should be false the first time. As the original method gets to run.' do
-      Aspects.on Mi_clase do
+      Aspects.on Mi_clase_cp do
         transform(where name(/m1/)) do
           before do |instance,cont,*args|
             instance.define_singleton_method cont.name do |*args|
@@ -89,7 +89,7 @@ describe 'aspects' do
     end
 
     it 'Using after. Should be true as the block runs after.' do
-      Aspects.on Mi_clase do
+      Aspects.on Mi_clase_cp do
         transform(where name(/m1/)) do
           after do |instance,cont,*args|
             true
@@ -100,7 +100,7 @@ describe 'aspects' do
     end
 
     it 'Using instead_of. Instead of doing 2+3 we do 20+10' do
-      Aspects.on Mi_clase do
+      Aspects.on Mi_clase_cp do
         transform(where name(/m1/)) do
           instead_of do |instance,cont,*args|
             20 + 10
