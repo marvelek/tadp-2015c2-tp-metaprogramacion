@@ -26,25 +26,21 @@ describe 'Name' do
     end
 
     it 'should match crazy_method if /crazy/ is used' do
-      block = name(/crazy/)
-      expect(block.call crazy_method).to be_truthy
+      expect(name(/crazy/).call crazy_method).to be_truthy
     end
 
     it 'should not match crazy_method if /boring/ is used' do
-      block = name(/boring/)
-      expect(block.call crazy_method).to be_falsey
+      expect(name(/boring/).call crazy_method).to be_falsey
     end
 
     it 'should match crazy_method and super_crazy_method if /crazy/ is used' do
-      block = name(/crazy/)
-      expect(block.call crazy_method).to be_truthy
-      expect(block.call super_crazy_method).to be_truthy
+      expect(name(/crazy/).call crazy_method).to be_truthy
+      expect(name(/crazy/).call super_crazy_method).to be_truthy
     end
 
     it 'should match crazy_method but no super_crazy_method if /^crazy/ is used' do
-      block = name(/^crazy/)
-      expect(block.call crazy_method).to be_truthy
-      expect(block.call super_crazy_method).to be_falsey
+      expect(name(/^crazy/).call crazy_method).to be_truthy
+      expect(name(/^crazy/).call super_crazy_method).to be_falsey
     end
 
 

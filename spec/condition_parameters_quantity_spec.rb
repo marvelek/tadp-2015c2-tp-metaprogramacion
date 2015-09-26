@@ -15,14 +15,19 @@ describe 'QuantityParameters instance' do
     let (:one_parameter_optional) {
       Dummy_class1.instance_method(:method_1opt).parameters
     }
+
+    let (:quantity_parameters) {
+      quantity_parameters = QuantityParameters.new
+    }
+
     it 'method_1param should be true' do
-      expect(QuantityParameters.new.filter(one_parameter_mandatory,1)).to be_truthy
+      expect(quantity_parameters.filter(one_parameter_mandatory, 1)).to be_truthy
     end
     it 'method_2param should be false' do
-      expect(QuantityParameters.new.filter(two_parameter_mandatories,1)).to be_falsey
+      expect(quantity_parameters.filter(two_parameter_mandatories, 1)).to be_falsey
     end
     it 'method_1opt should be true' do
-      expect(QuantityParameters.new.filter(one_parameter_optional,1)).to be_truthy
+      expect(quantity_parameters.filter(one_parameter_optional, 1)).to be_truthy
     end
   end
 
@@ -50,26 +55,26 @@ describe 'QuantityParameters instance' do
     }
 
     it 'method_3man should be true' do
-      expect(QuantityParameters.new.filter(three_mandatories,3)).to be_truthy
+      expect(quantity_parameters.filter(three_mandatories, 3)).to be_truthy
     end
     it 'method_2man_1opt should be true' do
-      expect(QuantityParameters.new.filter(two_mandatories_one_optional,3)).to be_truthy
+      expect(quantity_parameters.filter(two_mandatories_one_optional, 3)).to be_truthy
     end
     it 'method_1man_2opt should be true' do
-      expect(QuantityParameters.new.filter(one_mandatory_two_optional,3)).to be_truthy
+      expect(quantity_parameters.filter(one_mandatory_two_optional, 3)).to be_truthy
     end
     it 'method_3opt should be true' do
-      expect(QuantityParameters.new.filter(three_optional,3)).to be_truthy
+      expect(quantity_parameters.filter(three_optional, 3)).to be_truthy
     end
 
     it 'method_2params should be false' do
-      expect(QuantityParameters.new.filter(two_mandatories,3)).to be_falsey
+      expect(quantity_parameters.filter(two_mandatories, 3)).to be_falsey
     end
     it 'method_1man_1opt should be false' do
-      expect(QuantityParameters.new.filter(one_mandatory_one_optional,3)).to be_falsey
+      expect(quantity_parameters.filter(one_mandatory_one_optional, 3)).to be_falsey
     end
     it 'method_2opt should be false' do
-      expect(QuantityParameters.new.filter(two_optional,3)).to be_falsey
+      expect(quantity_parameters.filter(two_optional, 3)).to be_falsey
     end
   end
 end
